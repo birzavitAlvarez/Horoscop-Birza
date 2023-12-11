@@ -2,8 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
-    //id("com.google.dagger.hilt.android")
-    //id ("androidx.navigation.safeargs.kotlin")
+    id("com.google.dagger.hilt.android")
+    id ("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -37,6 +37,9 @@ android {
         jvmTarget = "1.8"
     }
     viewBinding.isEnabled = true
+    kotlin {
+        jvmToolchain(8)
+    }
 }
 
 dependencies {
