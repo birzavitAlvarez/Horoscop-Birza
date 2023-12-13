@@ -2,7 +2,9 @@ package com.birzavitalvarez.horoscappbirza.data.network
 
 //import com.birzavitalvarez.horoscappbirza.BuildConfig.BASE_URL
 //import com.birzavitalvarez.horoscappbirza.data.core.interceptors.AuthInterceptor
+import com.birzavitalvarez.horoscappbirza.BuildConfig.BASE_URL
 import com.birzavitalvarez.horoscappbirza.data.RepositoryImpl
+import com.birzavitalvarez.horoscappbirza.data.core.interceptors.AuthInterceptor
 import com.birzavitalvarez.horoscappbirza.domain.Repository
 import dagger.Module
 import dagger.Provides
@@ -23,7 +25,7 @@ object NetworkModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit{
         return Retrofit
                 .Builder()
-                .baseUrl("https://newatro.vercel.app/")
+                .baseUrl(BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -31,11 +33,12 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient():OkHttpClient{
+    fun provideOkHttpClient(authInterceptor: AuthInterceptor):OkHttpClient{
         val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient
             .Builder()
             .addInterceptor(interceptor)
+            .addInterceptor(authInterceptor)
             .build()
     }
 

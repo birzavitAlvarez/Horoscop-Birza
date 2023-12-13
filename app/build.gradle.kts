@@ -21,13 +21,25 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+            resValue("string","birzaname","HoroscAppBirza")
+
+            buildConfigField("String", "BASE_URL", "\"https://newastro.vercel.app/\"")
         }
+        // PONER ASI LA URL O REVIENTA XD
+        getByName("debug"){
+            isDebuggable = true
+            resValue("string","birzaname","[DEBUG] HoroscAppBirza")
+            buildConfigField("String", "BASE_URL", "\"https://newastro-debug.vercel.app/\"")
+        }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -36,7 +48,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     viewBinding.isEnabled = true
+
+    buildFeatures{
+        buildConfig = true
+    }
     kotlin {
         jvmToolchain(8)
     }
