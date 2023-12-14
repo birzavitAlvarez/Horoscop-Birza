@@ -17,7 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.birzavitalvarez.horoscappbirza.CustomTestRunner"
     }
 
     buildTypes {
@@ -30,7 +30,6 @@ android {
             )
 
             resValue("string","birzaname","HoroscAppBirza")
-
             buildConfigField("String", "BASE_URL", "\"https://newastro.vercel.app/\"")
         }
         // PONER ASI LA URL O REVIENTA XD
